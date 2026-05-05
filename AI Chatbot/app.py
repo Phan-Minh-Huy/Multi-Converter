@@ -106,7 +106,11 @@ def generate_custom_chart(title: str, categories: list[str], values: list[float]
 # Part 3: AI System &  Web Server
 def init_ai():
     global chat_session
-    api_key = "Enter your API key here" 
+    api_key = os.getenv("GEMINI_API_KEY") 
+
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY is not set in the environment variables. Please set it in your .env file.")
+
     genai.configure(api_key=api_key)
     
     model = genai.GenerativeModel(
