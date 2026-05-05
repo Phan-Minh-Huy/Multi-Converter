@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify, make_response
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 os.makedirs('static', exist_ok=True)
