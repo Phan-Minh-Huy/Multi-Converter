@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Converter | Smart Web Tools</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="background-blobs"></div>
+
+    <nav class="navbar">
+      <a href="../main.html" class="logo">Multi-Converter<span>.net</span></a>
+      <div class="nav-links">
+        <a href="../main.html">Calculator</a>
+        <a href="../temp_converter/index.html">Temperature</a>
+        <a href="index.html" class="active-link">Exchange Rate</a>
+        <a href="../tech_converter/index.html">Tech Tools</a> 
+        <a href="../file_converter/index.html">File Converter</a>
+      </div>
+        
+      </div>
+    </nav>
+
+    <div class="page-content">
+      <div class="main-container">
+        <div class="converter-left-col">
+          <section class="converter-card glass">
+            <div class="input-section">
+              <label
+                style="display: block; margin-bottom: 10px; font-weight: 600"
+                >Amount</label
+              >
+              <input
+                type="number"
+                id="amount"
+                placeholder="Enter amount..."
+                step="any"
+              />
+
+              <div class="unit-selectors">
+                <select id="fromCurrency">
+                  <option value="USD">USD - US Dollar</option>
+                  <option value="VND" selected>VND - VN Dong</option>
+                  <option value="EUR">EUR - Euro</option>
+                  <option value="JPY">JPY - Japanese Yen</option>
+                  <option value="KRW">KRW - Korean Won</option>
+                </select>
+                <span class="swap-icon">⇄</span>
+                <select id="toCurrency">
+                  <option value="USD" selected>USD - US Dollar</option>
+                  <option value="VND">VND - VN Dong</option>
+                  <option value="EUR">EUR - Euro</option>
+                  <option value="JPY">JPY - Japanese Yen</option>
+                  <option value="KRW">KRW - Korean Won</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="main-btn" onclick="convertCurrency()">
+              ⚡ Convert Currency
+            </button>
+
+            <div
+              id="resultContainer"
+              style="display: none; margin-top: 25px; text-align: center"
+            >
+              <div class="result-value">
+                <span
+                  id="exchangeResult"
+                  style="
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: var(--primary);
+                  "
+                  >---</span
+                >
+              </div>
+              <p
+                id="rateUpdate"
+                style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px"
+              >
+                Rates are updated in real-time
+              </p>
+            </div>
+          </section>
+
+          <section class="history-card glass" style="margin-top: 25px">
+            <div class="history-header">
+              <h3>Conversion History</h3>
+              <button onclick="clearCurrencyHistory()" class="clear-btn">
+                Clear
+              </button>
+            </div>
+            <ul id="currencyHistoryList"></ul>
+          </section>
+        </div>
+
+        <aside class="formula-sidebar glass" style="padding: 25px">
+          <h3 style="margin-bottom: 15px">Popular Exchange Rates</h3>
+          <div class="table-container">
+            <table class="custom-table">
+              <tbody id="popularRatesTable"></tbody>
+            </table>
+          </div>
+          <div class="formula-box" style="margin-top: 20px">
+            <strong>Note:</strong>
+            <p>
+              Exchange rates are fetched from a global financial API. Prices may
+              vary slightly from bank rates.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <button id="themeToggle">🌙</button>
+
+    <script src="index.js"></script>
+  </body>
+</html>

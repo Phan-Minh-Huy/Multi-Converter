@@ -32,7 +32,7 @@
   margin: 0;
   padding: 0;
   font-family: "Lexend", sans-serif;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 body {
@@ -45,7 +45,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Nền bong bóng */
+/* 
+   BACKGROUND EFFECT: FLOATING BUBBLES
+ */
 .background-blobs {
   position: fixed;
   width: 100vw;
@@ -68,14 +70,37 @@ body {
   background: var(--primary);
   top: -50px;
   left: -50px;
+  animation: float 12s ease-in-out infinite;
 }
 .background-blobs::after {
   background: var(--secondary);
   bottom: -50px;
   right: -50px;
+  animation: float-reverse 15s ease-in-out infinite;
 }
 
-/* Lớp Kính Mờ Chung */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1) translateX(0);
+  }
+  50% {
+    transform: translateY(50px) scale(1.1) translateX(30px);
+  }
+}
+@keyframes float-reverse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1) translateX(0);
+  }
+  50% {
+    transform: translateY(-50px) scale(0.9) translateX(-30px);
+  }
+}
+
+/* 
+    FROSTED GLASS & HOVER EFFECT
+ */
 .glass {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
@@ -84,8 +109,12 @@ body {
   border-radius: 24px;
   box-shadow: var(--card-shadow);
 }
+.glass:hover {
+  box-shadow: 0 15px 40px rgba(31, 38, 135, 0.25);
+  transform: translateY(-2px);
+}
 
-/* Thanh Điều Hướng */
+/* Navigation Bar */
 .navbar {
   width: 100%;
   padding: 20px 40px;
@@ -95,14 +124,13 @@ body {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--glass-border);
-  z-index: 10;
+  z-index: 100;
 }
 .logo {
   color: var(--text);
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
-  letter-spacing: -1px;
 }
 .logo span {
   color: var(--primary);
@@ -117,6 +145,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   opacity: 0.7;
+  position: relative;
 }
 .nav-links a:hover,
 .nav-links a.active-link {
@@ -124,14 +153,45 @@ body {
   opacity: 1;
 }
 
-/* Bố cục Grid chung */
+/* Underline effect when hovering on Navbar link */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after,
+.nav-links a.active-link::after {
+  width: 100%;
+}
+
+/* 
+  SLIDE-UP EFFECT WHEN LOADING PAGE
+ */
 .page-content {
   padding: 40px 20px;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   width: 100%;
+  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .main-container {
   display: flex;
   gap: 30px;
@@ -142,44 +202,8 @@ body {
   flex-wrap: wrap;
 }
 
-/* -------------------------------------
-   CSS RIÊNG CHO MÁY TÍNH
-------------------------------------- */
-.calculator {
-  padding: 30px;
-  width: 100%;
-  max-width: 700px;
-}
-.history-panel {
-  padding: 25px;
-  width: 100%;
-  max-width: 300px;
-  height: 520px;
-  display: flex;
-  flex-direction: column;
-}
-.display {
-  width: 100%;
-  padding: 15px 25px;
-  font-size: 2.5rem;
-  border-radius: 16px;
-  border: 2px solid transparent;
-  background: var(--display-bg);
-  color: var(--text);
-  text-align: right;
-  margin-bottom: 25px;
-  outline: none;
-  font-family: monospace;
-}
-.keys {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 10px;
-}
-.keys > button:nth-child(4) {
-  grid-column: span 2;
-}
-.keys button {
+/* Button */
+button {
   padding: 12px 5px;
   font-size: 15px;
   font-weight: 600;
@@ -189,11 +213,16 @@ body {
   background: var(--btn-bg);
   color: var(--text);
 }
-.keys button:hover {
+button:hover {
   background: var(--btn-hover);
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+button:active {
+  transform: scale(0.95) !important;
+  box-shadow: none !important;
+}
+
 .keys button.highlight {
   background: linear-gradient(45deg, var(--primary), var(--secondary));
   background-size: 200% auto;
@@ -205,9 +234,9 @@ body {
   box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
 }
 
-/* -------------------------------------
-   CSS RIÊNG CHO ĐỔI NHIỆT ĐỘ
-------------------------------------- */
+/* 
+   A dedicated UI for temperature control
+ */
 .converter-left-col {
   flex: 1;
   width: 100%;
@@ -234,10 +263,14 @@ body {
   margin-bottom: 15px;
   outline: none;
 }
+/* Halo effect when selecting an input field */
 .converter-card input:focus {
   border-color: var(--primary);
   background: transparent;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+  transform: scale(1.02);
 }
+
 .unit-selectors {
   display: flex;
   align-items: center;
@@ -255,7 +288,14 @@ select {
   outline: none;
   cursor: pointer;
 }
+select:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(99, 102, 241, 0.3);
+}
 
+/* 
+   A DEDICATED BUTTON FOR CONVERTING TEMPERATURE 
+ */
 .main-btn {
   width: 100%;
   padding: 16px;
@@ -263,15 +303,23 @@ select {
   border: none;
   background: linear-gradient(45deg, var(--primary), var(--secondary));
   background-size: 200% auto;
-  color: white;
+  color: white !important; /* Ép buộc chữ luôn màu trắng */
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-  transition: 0.4s;
+  transition: all 0.4s ease;
 }
+
 .main-btn:hover {
-  background-position: right center;
+  background: linear-gradient(
+    45deg,
+    var(--primary),
+    var(--secondary)
+  ) !important;
+  background-size: 200% auto !important;
+  background-position: right center !important;
+  color: white !important;
   transform: translateY(-3px);
   box-shadow: 0 15px 25px rgba(99, 102, 241, 0.4);
 }
@@ -292,6 +340,9 @@ select {
   height: 35px;
   border-radius: 10px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .copy-btn:hover {
   background: var(--secondary);
@@ -369,6 +420,12 @@ select {
 .k-tag {
   background: #9b59b6;
 }
+.r-tag {
+  background: #2ecc71;
+}
+.re-tag {
+  background: #e74c3c;
+}
 .def-item p {
   font-size: 0.85rem;
   line-height: 1.4;
@@ -379,36 +436,67 @@ select {
   display: block;
 }
 
-/* -------------------------------------
-   TIỆN ÍCH CHUNG (Nút xóa, History, Theme)
-------------------------------------- */
+/* 
+   GENERAL UTILITIES (Delete button, History, Theme)
+ */
+
+.history-card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bar containing title and buttons */
 .history-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  font-weight: bold;
+  width: 100%;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--glass-border);
 }
+
+/*  "Recent History" */
+.history-header h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.25rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+/*  "Clear All" */
 .clear-btn {
+  margin: 0;
+  padding: 6px 16px;
   background: rgba(231, 76, 60, 0.1);
   color: #e74c3c;
   border: 1px solid rgba(231, 76, 60, 0.2);
-  padding: 6px 15px;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  transition: all 0.3s ease;
 }
+
 .clear-btn:hover {
   background: #e74c3c;
   color: white;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+  transform: translateY(-2px);
 }
+
 #historyList,
 #history-list {
   list-style: none;
   overflow-y: auto;
   flex-grow: 1;
-  max-height: 250px;
+  max-height: 350px;
 }
 #historyList li,
 #history-list li {
@@ -417,12 +505,18 @@ select {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
+  animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-h1 {
-  margin: 30px 0;
-  font-size: 2.5rem;
-  color: var(--text);
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 #themeToggle {
@@ -444,8 +538,48 @@ h1 {
   z-index: 1000;
   color: var(--text);
 }
+
 #themeToggle:hover {
-  transform: scale(1.1) rotate(15deg);
+  transform: scale(1.15) rotate(15deg);
   background: var(--primary);
   color: white;
+}
+
+/* Footer */
+footer {
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid var(--glass-border);
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: auto;
+}
+footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+}
+footer a:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.converter-card {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.converter-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.converter-card h1 {
+  color: var(--primary);
+  margin-bottom: 5px;
+  font-size: 1.9rem;
+  align-items: center;
 }

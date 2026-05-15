@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Converter | Smart Web Tools</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="background-blobs"></div>
+
+    <nav class="navbar">
+      <a href="../main.html" class="logo">Multi-Converter<span>.net</span></a>
+      <div class="nav-links">
+        <a href="../main.html">Calculator</a>
+        <a href="../temp_converter/index.html">Temperature</a>
+        <a href="../currency_converter/index.html">Exchange Rate</a>
+        <a href="../tech_converter/index.html" class="active-link"
+          >Tech Tools</a
+        >
+        <a href="../file_converter/index.html">File Converter</a>
+      </div>
+    </nav>
+
+    <div class="page-content">
+      <div class="tech-container">
+        <section class="tech-card glass">
+          <h3>💾 Data Storage</h3>
+          <p class="subtitle">Convert Bytes, KB, MB, GB, TB...</p>
+          <div class="input-group">
+            <input
+              type="number"
+              id="dataInput"
+              placeholder="Enter value..."
+              oninput="convertData()"
+              value="1"
+            />
+            <div class="unit-selectors">
+              <select id="dataFrom" onchange="convertData()">
+                <option value="b">Bit (b)</option>
+                <option value="B">Byte (B)</option>
+                <option value="KB">Kilobyte (KB)</option>
+                <option value="MB" selected>Megabyte (MB)</option>
+                <option value="GB">Gigabyte (GB)</option>
+                <option value="TB">Terabyte (TB)</option>
+              </select>
+              <span class="swap-icon">⇄</span>
+              <select id="dataTo" onchange="convertData()">
+                <option value="b">Bit (b)</option>
+                <option value="B">Byte (B)</option>
+                <option value="KB">Kilobyte (KB)</option>
+                <option value="MB">Megabyte (MB)</option>
+                <option value="GB" selected>Gigabyte (GB)</option>
+                <option value="TB">Terabyte (TB)</option>
+              </select>
+            </div>
+            <div class="result-box">
+              <span id="dataResult">0.001 GB</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="tech-card glass">
+          <h3>🔢 Number Base (Binary)</h3>
+          <p class="subtitle">Decimal, Binary, Octal, Hexadecimal</p>
+          <div class="base-inputs">
+            <div class="base-group">
+              <label>Decimal (Base 10)</label>
+              <input
+                type="text"
+                id="decInput"
+                placeholder="e.g. 255"
+                oninput="convertBase('dec')"
+              />
+            </div>
+            <div class="base-group">
+              <label>Binary (Base 2)</label>
+              <input
+                type="text"
+                id="binInput"
+                placeholder="e.g. 11111111"
+                oninput="convertBase('bin')"
+              />
+            </div>
+            <div class="base-group">
+              <label>Hexadecimal (Base 16)</label>
+              <input
+                type="text"
+                id="hexInput"
+                placeholder="e.g. FF"
+                oninput="convertBase('hex')"
+              />
+            </div>
+            <div class="base-group">
+              <label>Octal (Base 8)</label>
+              <input
+                type="text"
+                id="octInput"
+                placeholder="e.g. 377"
+                oninput="convertBase('oct')"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="tech-card glass">
+          <h3>🎨 Color Converter</h3>
+          <p class="subtitle">HEX to RGB & HSL</p>
+          <div class="color-picker-wrapper">
+            <input
+              type="color"
+              id="colorPicker"
+              value="#ffffff"
+              oninput="convertColor()"
+            />
+            <input
+              type="text"
+              id="hexColorInput"
+              value="#ffffff"
+              oninput="convertColorFromText()"
+              placeholder="#HEX"
+            />
+          </div>
+          <div class="color-results">
+            <div class="color-box">
+              <strong>RGB:</strong>
+              <span id="rgbResult">rgb(255, 255, 255)</span>
+            </div>
+            <div class="color-box">
+              <strong>HSL:</strong>
+              <span id="hslResult">hsl(0, 0%, 100%)</span>
+            </div>
+          </div>
+          <div
+            class="color-preview"
+            id="colorPreview"
+            style="background-color: #ffffff"
+          ></div>
+        </section>
+      </div>
+    </div>
+
+    <button id="themeToggle">🌙</button>
+
+    <footer>
+      <div class="footer-info">
+        <p>
+          &copy; 2026 Scientific Computing Project. Developed by
+          <strong>Minh Huy Phan</strong>.
+        </p>
+        <p>
+          Contact:
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=pmhuy0911@gmail.com"
+            target="_blank"
+            >pmhuy0911@gmail.com</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>

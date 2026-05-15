@@ -1,4 +1,4 @@
-/* Import font chữ Lexend hiện đại */
+/* Import modern Lexend font */
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap");
 
 :root {
@@ -10,8 +10,8 @@
   --text: #1e293b;
   --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 
-  /* Biến màu riêng cho nút bấm máy tính */
-  --btn-bg: rgba(255, 255, 255, 0.5);
+  /* Customizable colors for computer buttons */
+  --btn-bg: rgba(0, 0, 0, 0.05);
   --btn-hover: rgba(255, 255, 255, 0.9);
   --display-bg: rgba(0, 0, 0, 0.05);
 }
@@ -22,8 +22,8 @@
   --glass-border: rgba(255, 255, 255, 0.05);
   --text: #f1f5f9;
 
-  /* Màu nút bấm khi ở chế độ tối */
-  --btn-bg: rgba(0, 0, 0, 0.2);
+  /* Customizable colors for computer buttons in dark mode */
+  --btn-bg: rgba(255, 255, 255, 0.2);
   --btn-hover: rgba(0, 0, 0, 0.4);
   --display-bg: rgba(0, 0, 0, 0.2);
 }
@@ -46,9 +46,7 @@ body {
   overflow-x: hidden;
 }
 
-/* =========================================
-   HIỆU ỨNG BONG BÓNG MÀU NỀN (BLOBS)
-========================================= */
+/* BACKGROUND COLOR BLOCK EFFECT (BLOBS) */
 .background-blobs {
   position: fixed;
   width: 100vw;
@@ -79,7 +77,7 @@ body {
 }
 
 /* =========================================
-   HIỆU ỨNG KÍNH MỜ (GLASSMORPHISM)
+   FOAM GLASS EFFECT (GLASSMORPHISM)
 ========================================= */
 .glass {
   background: var(--glass-bg);
@@ -90,9 +88,8 @@ body {
   box-shadow: var(--card-shadow);
 }
 
-/* =========================================
-   THANH ĐIỀU HƯỚNG (NAVBAR)
-========================================= */
+/* NAVIGATION BAR (NAVBAR) */
+
 .navbar {
   width: 100%;
   padding: 20px 40px;
@@ -102,20 +99,17 @@ body {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--glass-border);
-  z-index: 10;
+  z-index: 100;
 }
-
 .logo {
   color: var(--text);
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
-  letter-spacing: -1px;
 }
 .logo span {
   color: var(--primary);
 }
-
 .nav-links {
   display: flex;
   gap: 30px;
@@ -126,6 +120,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   opacity: 0.7;
+  position: relative;
 }
 .nav-links a:hover,
 .nav-links a.active-link {
@@ -133,9 +128,22 @@ body {
   opacity: 1;
 }
 
-/* =========================================
-   BỐ CỤC CHÍNH (MÁY TÍNH & LỊCH SỬ)
-========================================= */
+/* Underline effect when hovering on Navbar link */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after,
+.nav-links a.active-link::after {
+  width: 100%;
+}
+/* MAIN STRUCTURE (COMPUTERS & HISTORY) */
 .page-content {
   padding: 40px 20px;
   flex-grow: 1;
@@ -151,10 +159,10 @@ body {
   width: 100%;
   justify-content: center;
   align-items: flex-start;
-  flex-wrap: wrap; /* Hỗ trợ thu nhỏ trên điện thoại */
+  flex-wrap: wrap; /* Supports shrinking on phones. */
 }
 
-/* Áp dụng class .glass cho Calculator và History */
+/* Apply the .glass class to Calculator and History. */
 .calculator {
   padding: 30px;
   width: 100%;
@@ -170,9 +178,9 @@ body {
   flex-direction: column;
 }
 
-/* =========================================
-   GIAO DIỆN MÁY TÍNH CHI TIẾT
-========================================= */
+/* 
+   CALCULATOR UI DETAILS
+ */
 .display {
   width: 100%;
   padding: 15px 25px;
@@ -224,9 +232,9 @@ body {
   box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
 }
 
-/* =========================================
-   GIAO DIỆN LỊCH SỬ CHI TIẾT
-========================================= */
+/* 
+   HISTORY PANEL DETAILS
+*/
 .history-header {
   display: flex;
   justify-content: space-between;
@@ -293,9 +301,9 @@ body {
   }
 }
 
-/* =========================================
-   NÚT CHUYỂN ĐỔI GIAO DIỆN (THEME TOGGLE)
-========================================= */
+/* 
+   THEME TOGGLE BUTTON
+ */
 #themeToggle {
   position: fixed;
   bottom: 30px;
@@ -321,9 +329,25 @@ body {
   color: white;
 }
 
-/* =========================================
+.calculator-wrapper {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.calculator-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.calculator-wrapper h3 {
+  color: var(--primary);
+  margin-bottom: 5px;
+  font-size: 1.9rem;
+}
+/* 
    FOOTER
-========================================= */
+ */
 footer {
   padding: 20px;
   text-align: center;
@@ -342,4 +366,15 @@ h1 {
   margin: 30px 0;
   font-size: 2.5rem;
   color: var(--text);
+}
+
+.clear-history-btn {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
 }
