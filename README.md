@@ -1,4 +1,4 @@
-# 🛠️ Smart Web Tools - All-in-One Utility Platform
+# 🛠️ Multi-Converter - All-in-One Utility Platform
 
 ![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![Node.js](https://img.shields.io/badge/Node.js-Backend-43853D?logo=node.js)
@@ -7,7 +7,7 @@
 
 ## 🌟 About the Project
 
-**Smart Web Tools** is a versatile web platform providing an "All-in-One" utility suite. Designed with a modern **Glassmorphism** interface, it supports Dark/Light mode and delivers a seamless user experience through highly optimized client-side and server-side processing.
+**Multi-Converter** is a versatile web platform providing an "All-in-One" utility suite. Designed with a modern **Glassmorphism** interface, it supports Dark/Light mode and delivers a seamless user experience through highly optimized client-side and server-side processing.
 
 The core highlight of this project is the powerful **File Converter** suite:
 - **Ultra-fast Image Conversion** processed entirely on the browser with zero server latency.
