@@ -105,5 +105,5 @@ cron.schedule("0 * * * *", async () => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`🛡️ The server is fully protected.`);
-  console.log(`🌐 Running at: http://localhost:${PORT}/main.html`);
+  console.log(`🌐 Running at: http://localhost:${PORT}/index.html`);
 });
